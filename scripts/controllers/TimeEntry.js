@@ -14,7 +14,7 @@
 
       vm.totalTime = {};
 
-	  // Fetches the time entries from the static JSON file
+      // Fetches the time entries from the static JSON file
       // and puts the results on the vm.timeentries array
       time.getTime().then(function(results) {
         vm.timeentries = results;
