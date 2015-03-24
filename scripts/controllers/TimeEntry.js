@@ -20,6 +20,8 @@
         vm.timeentries = results;
         updateTotalTime(vm.timeentries);
         console.log(vm.timeentries);
+      }, function(error) {
+        console.log(error);
       });
 
       // Updates the values in the total time box by calling the

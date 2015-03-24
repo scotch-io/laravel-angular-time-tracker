@@ -24,6 +24,8 @@
           });
 
           return results;
+        }, function(error) {
+          console.log(error);
         });
       }
 
