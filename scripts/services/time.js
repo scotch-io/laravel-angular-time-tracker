@@ -47,10 +47,12 @@
           totalMilliseconds += key.loggedTime.duration._milliseconds;
         });
 
-        // We can access the hours and minutes of the total
-        // time directly from Moment's duration calculation
+        // After 24 hours, the Moment.js duration object
+        // reports the next unit up, which is days.
+        // Using the asHours method and rounding down with
+        // Math.floor instead gives us the total hours
         return {
-          hours: moment.duration(totalMilliseconds).hours(),
+          hours: Math.floor(moment.duration(totalMilliseconds).asHours()),
           minutes: moment.duration(totalMilliseconds).minutes()
         }
       }
