@@ -49,7 +49,39 @@
                             <h2><span class="label label-primary" ng-show="time.loggedTime.duration._data.hours > 0">{{time.loggedTime.duration._data.hours}} hour<span ng-show="time.loggedTime.duration._data.hours > 1">s</span></span></h2>
                             <h4><span class="label label-default">{{time.loggedTime.duration._data.minutes}} minutes</span></h4>
                         </div>
+                        <div class="edit-delete">
+                            <button class="btn btn-primary btn-xs" ng-click="showEditDialog = true">Edit</button>
+                            <button class="btn btn-danger btn-xs" ng-click="vm.deleteTimeEntry(time)">Delete</button>
+                        </div>
                     </div>
+
+                    <div class="row edit-time-entry" ng-show="showEditDialog === true">
+                        <h4>Edit Time Entry</h4>
+                        <h5>Time Entry</h5>
+                        <div class="time-entry">
+                            <div class="timepicker">
+                                <span class="timepicker-title label label-primary">Clock In</span><timepicker ng-model="vm.clockIn" hour-step="1" minute-step="1" show-meridian="true"></timepicker> 
+                            </div>
+                            <div class="timepicker">
+                                <span class="timepicker-title label label-primary">Clock Out</span><timepicker ng-model="vm.clockOut" hour-step="1" minute-step="1" show-meridian="true"></timepicker>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <h5>User</h5>
+                            <select name="user" class="form-control" ng-model="vm.timeEntryUser" ng-options="time.user.first_name + ' ' + time.user.last_name for time in vm.timeentries">
+                                <option value="">-- Select a user --</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-6">
+                            <h5>Comment</h5>
+                            <textarea class="form-control">{{time.comment}}</textarea>
+                        </div>
+                        <div class="edit-controls">
+                            <button class="btn btn-primary btn-xs">Save</button>
+                            <button class="btn btn-danger btn-xs" ng-click="showEditDialog = false">Close</button>
+                        </div>                            
+                    </div>
+                   
                 </div>
 
             </div>

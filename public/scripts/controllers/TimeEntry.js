@@ -6,7 +6,7 @@
     .module('timeTracker')
     .controller('TimeEntry', TimeEntry);
 
-    function TimeEntry(time) {
+    function TimeEntry(time, $scope) {
 
       var vm = this;
 
@@ -48,7 +48,7 @@
           "start_time":vm.clockIn,
           "end_time":vm.clockOut,
           "comment":vm.comment,
-          "_token":"KVu3G1EYK5Xfwidt8oDBqpwVUSRUjxOutbrddsXb"
+          "_token":"Zz7P4adiQMbNbWCvOWeSJj6bVJ74RQQeswgBa77v"
         });
 
         console.log(vm.timeentries);
@@ -57,6 +57,17 @@
 
         vm.comment = "";
       }
+
+      vm.deleteTimeEntry = function(timeentry) {
+        
+        var id = timeentry.id;
+
+        time.deleteTime(id);
+
+      }
+
     }
+
+    
 
 })();

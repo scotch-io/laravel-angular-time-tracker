@@ -9,7 +9,7 @@
     function time($resource) {
 
       // ngResource call to our static data
-      var Time = $resource('api/time');
+      var Time = $resource('api/time/:id');
 
       function getTime() {
 
@@ -32,6 +32,14 @@
       function saveTime(data) {
 
         return Time.save(data, function(success) {
+          console.log(success);
+        }, function(error) {
+          console.log(error);
+        });
+      }
+
+      function deleteTime(id) {
+        return Time.delete({id:id}, function(success) {
           console.log(success);
         }, function(error) {
           console.log(error);
@@ -68,7 +76,8 @@
         getTime: getTime,
         getTimeDiff: getTimeDiff,
         getTotalTime: getTotalTime,
-        saveTime: saveTime
+        saveTime: saveTime,
+        deleteTime: deleteTime
       }
     }
 
