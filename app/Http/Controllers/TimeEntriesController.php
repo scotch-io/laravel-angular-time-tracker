@@ -77,7 +77,16 @@ class TimeEntriesController extends Controller {
 	 */
 	public function update($id)
 	{
-		//
+		$timeentry = TimeEntry::find($id);
+
+		$data = Request::all();
+
+		if($data)
+		{
+			$timeentry->fill($data);
+
+			$timeentry->save();
+		}
 	}
 
 	/**

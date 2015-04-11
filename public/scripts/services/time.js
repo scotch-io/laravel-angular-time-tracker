@@ -9,7 +9,11 @@
     function time($resource) {
 
       // ngResource call to our static data
-      var Time = $resource('api/time/:id');
+      var Time = $resource('api/time/:id', {}, {
+        update: {
+          method: 'PUT'
+        }
+      });
 
       function getTime() {
 
@@ -32,6 +36,14 @@
       function saveTime(data) {
 
         return Time.save(data, function(success) {
+          console.log(success);
+        }, function(error) {
+          console.log(error);
+        });
+      }
+
+      function updateTime(data) {
+        return Time.update({id:data.id}, data, function(success) {
           console.log(success);
         }, function(error) {
           console.log(error);
@@ -64,10 +76,12 @@
           totalMilliseconds += key.loggedTime.duration._milliseconds;
         });
 
-        // We can access the hours and minutes of the total
-        // time directly from Moment's duration calculation
+        // After 24 hours, the Moment.js duration object
+        // reports the next unit up, which is days.
+        // Using the asHours method and rounding down with
+        // Math.floor instead gives us the total hours
         return {
-          hours: moment.duration(totalMilliseconds).hours(),
+          hours: Math.floor(moment.duration(totalMilliseconds).asHours()),
           minutes: moment.duration(totalMilliseconds).minutes()
         }
       }
@@ -77,6 +91,7 @@
         getTimeDiff: getTimeDiff,
         getTotalTime: getTotalTime,
         saveTime: saveTime,
+        updateTime: updateTime,
         deleteTime: deleteTime
       }
     }

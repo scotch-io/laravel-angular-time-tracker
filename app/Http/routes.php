@@ -24,4 +24,5 @@ Route::controllers([
 Route::group(array('prefix' => 'api'), function()
 {
 	Route::resource('time', 'TimeEntriesController');
+	Route::resource('users', 'UsersController');
 });
