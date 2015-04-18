@@ -3,6 +3,7 @@
 Code for the Laravel + Angular Time Tracker Tutorial on [Scotch.io](https://scotch.io).
 
 [Build a Time Tracker with Laravel 5 and AngularJS – Part 1](https://scotch.io/tutorials/build-a-time-tracker-with-laravel-5-and-angularjs-part-1)
+
 [Build a Time Tracker with Laravel 5 and AngularJS – Part 2](#)
 
 ---
