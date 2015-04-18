@@ -1,3 +1,7 @@
+<<<<<<< HEAD
 /vendor
 /node_modules
 .env
+=======
+.DS_Store
+>>>>>>> 3fd6cfcb21abbda32e18b9e8833fb60d364c2936
