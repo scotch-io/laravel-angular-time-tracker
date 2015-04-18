@@ -8,7 +8,7 @@
 
     function time($resource) {
 
-      // ngResource call to our static data
+      // ngResource call to the API with id as a paramaterized URL
       var Time = $resource('api/time/:id', {}, {
         update: {
           method: 'PUT'
@@ -33,25 +33,28 @@
         });
       }
 
+      // Grab data passed from the view and send
+      // a POST request to the API to save the data
       function saveTime(data) {
-
-        return Time.save(data, function(success) {
+        return Time.save(data).$promise.then(function(success) {
           console.log(success);
         }, function(error) {
           console.log(error);
         });
       }
 
+      // Use a PUT request to save the updated data passed in
       function updateTime(data) {
-        return Time.update({id:data.id}, data, function(success) {
+        return Time.update({id:data.id}, data).$promise.then(function(success) {
           console.log(success);
         }, function(error) {
           console.log(error);
         });
       }
 
+      // Send a DELETE request for a specific time entry 
       function deleteTime(id) {
-        return Time.delete({id:id}, function(success) {
+        return Time.delete({id:id}).$promise.then(function(success) {
           console.log(success);
         }, function(error) {
           console.log(error);
@@ -68,7 +71,7 @@
         }
       }
 
-      // Adds up the total time for all of our time entries
+      // Add up the total time for all of our time entries
       function getTotalTime(timeentries) {
         var totalMilliseconds = 0;
 

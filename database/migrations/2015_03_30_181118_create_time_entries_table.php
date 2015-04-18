@@ -10,6 +10,8 @@ class CreateTimeEntriesTable extends Migration {
 	 *
 	 * @return void
 	 */
+
+	// the up method creates the below fields in our time entries table
 	public function up()
 	{
 		Schema::create('time_entries', function(Blueprint $table)
@@ -18,7 +20,7 @@ class CreateTimeEntriesTable extends Migration {
 			$table->integer('user_id')->unsigned();
 			$table->dateTime('start_time');
 			$table->dateTime('end_time');
-			$table->string('comment');
+			$table->string('comment')->nullable();
 			$table->timestamps();
 		});
 	}

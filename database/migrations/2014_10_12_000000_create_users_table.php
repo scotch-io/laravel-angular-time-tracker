@@ -10,6 +10,8 @@ class CreateUsersTable extends Migration {
 	 *
 	 * @return void
 	 */
+	
+	// the up method creates the below fields in our users table
 	public function up()
 	{
 		Schema::create('users', function(Blueprint $table)

@@ -20,6 +20,7 @@
 
       // Grab all the time entries saved in the database
       getTimeEntries();
+
       // Get the users from the database so we can select
       // who the time entry belongs to
       getUsers();
@@ -32,8 +33,8 @@
         });
       }
 
-      // Fetches the time entries from the static JSON file
-      // and puts the results on the vm.timeentries array
+      // Fetch the time entries and put the results
+      // on the vm.timeentries array
       function getTimeEntries() {
         time.getTime().then(function(results) {
           vm.timeentries = results;
@@ -44,14 +45,54 @@
         });
       }
 
-      // Updates the values in the total time box by calling the
+      // Update the values in the total time box by calling the
       // getTotalTime method on the time service
       function updateTotalTime(timeentries) {
         vm.totalTime = time.getTotalTime(timeentries);
       }
 
+      // Submit the time entry that will be called 
+      // when we click the "Log Time" button
+      vm.logNewTime = function() {
+
+      	// Make sure that the clock-in time isn't after
+      	// the clock-out time!
+        if(vm.clockOut < vm.clockIn) {
+          alert("You can't clock out before you clock in!");
+          return;
+        }
+
+        // Call the saveTime method on the time service
+        // to save the new time entry to the database
+        time.saveTime({
+          "user_id":vm.timeEntryUser.id,
+          "start_time":vm.clockIn,
+          "end_time":vm.clockOut,
+          "comment":vm.comment
+        }).then(function(success) {
+          getTimeEntries();
+          console.log(success);
+        }, function(error) {
+          console.log(error);
+        });
+
+        getTimeEntries();
+
+        // Reset clockIn and clockOut times to the current time
+        vm.clockIn = moment();
+        vm.clockOut = moment();
+
+        // Clear the comment field
+        vm.comment = "";
+
+        // Deselect the user
+        vm.timeEntryUser = "";
+
+      }
+
       vm.updateTimeEntry = function(timeentry) {
 
+        // Collect the data that will be passed to the updateTime method
         var updatedTimeEntry = {
           "id":timeentry.id,
           "user_id":timeentry.user.id,
@@ -60,42 +101,28 @@
           "comment":timeentry.comment
         }
 
-        time.updateTime(updatedTimeEntry);
-        console.log(timeentry);
-        getTimeEntries();
-
-        $scope.showEditDialog = false;
-      }
-
-      // Submits the time entry that will be called 
-      // when we click the "Log Time" button
-      vm.logNewTime = function() {
-      	// Make sure that the clock-in time isn't after
-      	// the clock-out time!
-        if(vm.clockOut < vm.clockIn) {
-          alert("You can't clock out before you clock in!");
-          return;
-        }
-
-        time.saveTime({
-          "user_id":vm.timeEntryUser.id,
-          "start_time":vm.clockIn,
-          "end_time":vm.clockOut,
-          "comment":vm.comment
+        // Update the time entry and then refresh the list
+        time.updateTime(updatedTimeEntry).then(function(success) {
+          getTimeEntries();
+          $scope.showEditDialog = false;
+          console.log(success);
+        }, function(error) {
+          console.log(error);
         });
-
-        getTimeEntries();
-
-        vm.comment = "";
+        
       }
 
+      // Specify the time entry to be deleted and pass it to the deleteTime method on the time service
       vm.deleteTimeEntry = function(timeentry) {
         
         var id = timeentry.id;
 
-        time.deleteTime(id);
-
-        getTimeEntries();
+        time.deleteTime(id).then(function(success) {
+          getTimeEntries();
+          console.log(success);
+        }, function(error) {
+          console.log(error);
+        });      
 
       }
     }    
