@@ -42,7 +42,7 @@
                             <p><i class="glyphicon glyphicon-pencil"></i> {{time.comment}}</p>                  
                         </div>
                         <div class="col-sm-4 time-numbers">
-                            <h4><i class="glyphicon glyphicon-calendar"></i> {{time.end_time | date:'mediumDate'}}</h4>
+                            <h4><i class="glyphicon glyphicon-calendar"></i> {{time.end_time | date:'MMM dd, yyyy'}}</h4>
                             <h2><span class="label label-primary" ng-show="time.loggedTime.duration._data.hours > 0">{{time.loggedTime.duration._data.hours}} hour<span ng-show="time.loggedTime.duration._data.hours > 1">s</span></span></h2>
                             <h4><span class="label label-default">{{time.loggedTime.duration._data.minutes}} minutes</span></h4>
                         </div>
