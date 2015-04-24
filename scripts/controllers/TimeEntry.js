@@ -14,6 +14,10 @@
 
       vm.totalTime = {};
 
+      // Initialize the clockIn and clockOut times to the current time.
+      vm.clockIn = new Date();
+      vm.clockOut = new Date();
+
       // Fetches the time entries from the static JSON file
       // and puts the results on the vm.timeentries array
       time.getTime().then(function(results) {
