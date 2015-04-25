@@ -9,4 +9,4 @@ Code for the Laravel + Angular Time Tracker Tutorial on [Scotch.io](https://scot
 ---
 ###A Note About Composer
 
-Laravel 5 ignores all files in the /vendor and directories by default. After you've cloned this repo, run a `composer update` to install the necessary dependencies.
+Laravel 5 ignores all files in the /vendor directory by default. After you've cloned this repo, run a `composer update` to install the necessary dependencies.

@@ -62,6 +62,11 @@
           return;
         }
 
+        if(vm.clockOut - vm.clockIn === 0) {
+          alert("Your time entry has to be greater than zero!");
+          return;
+        }
+        
         // Call the saveTime method on the time service
         // to save the new time entry to the database
         time.saveTime({
