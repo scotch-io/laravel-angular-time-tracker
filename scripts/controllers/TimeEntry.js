@@ -48,7 +48,6 @@
           alert("Your time entry has to be greater than zero!");
           return;
         }
-        console.log(vm.clockOut - vm.clockIn);
 
         vm.timeentries.push({
           "user_id":1,
