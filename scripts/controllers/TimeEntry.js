@@ -44,6 +44,11 @@
           alert("You can't clock out before you clock in!");
           return;
         }
+        if(vm.clockOut - vm.clockIn === 0) {
+          alert("Your time entry has to be greater than zero!");
+          return;
+        }
+        console.log(vm.clockOut - vm.clockIn);
 
         vm.timeentries.push({
           "user_id":1,
